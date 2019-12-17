@@ -1,0 +1,48 @@
+#!/usr/bin/python3
+
+import sys
+from math import *
+
+def split(word):
+    return [char for char in word]
+
+def h():
+    print("USAGE")
+    print("\t./104intersection opt xp yp zp xv yv zv p")
+    print("")
+    print("DESCRIPTION")
+    print("\topt\t\tsurface option: 1 for a sphere, 2 for a cylinder, 3 for a cone")
+    print("\t(xp, yp, zp)\tcoordinates of a point by which the light ray passes through")
+    print("\t(xv, yv, zv)\tcoordinates of a vector parallel to the light rav")
+    print("\tp\t\tparameter: radius of the sphere, radius of the cylinder, or")
+    print("\t\t\tangle formed by the cone and the Z-axis")
+
+def encrypte(av):
+    print("Encrypted message:")
+
+
+def decrypte(av):
+    print("Decrypted message:")
+
+def message(av):
+    if (av[3] == "0"):
+        encrypte(av)
+    if (av[3] == "1"):
+        decrypte(av)
+
+def main():
+    try :
+        av = sys.argv
+        l = len(sys.argv)
+        if (av[1] == "-h"):
+            h()
+        else:
+            if (l == 4):
+                message(av)
+            else:
+                exit(84)
+    except :
+        exit(84)
+
+if __name__ == "__main__":
+    main()
