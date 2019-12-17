@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import sys
 from math import *
@@ -17,18 +17,63 @@ def h():
     print("\tp\t\tparameter: radius of the sphere, radius of the cylinder, or")
     print("\t\t\tangle formed by the cone and the Z-axis")
 
-def encrypte(av):
-    print("Encrypted message:")
+def sphere(av):
+    print("Sphere of radius ", av[8], sep= "")
+    print("Line passing through the point (", av[2], ", ", av[3], ", ", av[4], ") and parallel to the vector (", av[5], ", ", av[6], ", ", av[7], ")", sep= "")
+    a = int(av[5]) * int(av[5]) + int(av[6]) * int(av[6]) + int(av[7]) * int(av[7])
+    b = 2 * ((int(av[5]) * int(av[2])) + (int(av[6]) * int(av[3])) + (int(av[7]) * int(av[4])))
+    c = int(av[2]) * int(av[2]) + int(av[3]) * int(av[3]) + int(av[4]) * int(av[4]) - int(av[8]) * int(av[8])
+    determinant =  (b * b) - (4 * a * c)
+    X = int(av[5]) * determinant + int(av[2])
+    Y = int(av[6]) * determinant + int(av[3])
+    Z = int(av[7]) * determinant + int(av[4])
+    if (determinant < 0):
+        print("No intersection point.")
+    if (determinant == 0):
+        print("1 intersection point:")
+        s1 = -b/(2 * a)
+        print("(", "%.3f" % float(X), ", 0.000, 0.000)", sep= "")
+    if (determinant > 0):
+        print("2 intersection point:")
+        s1 = -b + math.sqrt(determinant)/(2*a)
+        s2 = -b - math.sqrt(determinant)/(2*a)
+        print("(","%.3f" % X, ", ", Y, ", ", Z, sep= "")
+        print("(","%.3f" % (X*-1), ", ", "%.3f" % (Y*-1), ", ", "%.3f" % Z, sep= "")
 
+def cylinder(av):
+    print("Cylinder of radius ", av[8])
+    print("Line passing through the point (", av[2], ", ", av[3], ", ", av[4], ") and parallel to the vector (", av[5], ", ", av[6], ", ", av[7], ")", sep= "")
+    a = int(av[5]) * int(av[5]) + int(av[6]) * int(av[6]) + int(av[7]) * int(av[7])
+    b = 2 * ((int(av[5]) * int(av[2])) + (int(av[6]) * int(av[3])) + (int(av[7]) * int(av[4])))
+    c = int(av[2]) * int(av[2]) + int(av[3]) * int(av[3]) + int(av[4]) * int(av[4]) - int(av[8]) * int(av[8])
+    determinant =  (b * b) - (4 * a * c)
+    X = int(av[5]) * determinant + int(av[2])
+    Y = int(av[6]) * determinant + int(av[3])
+    Z = int(av[7]) * determinant + int(av[4])
+    if (determinant < 0):
+        print("No intersection point.")
+    if (determinant == 0):
+        print("1 intersection point:")
+        s1 = -b/(2 * a)
+        print("(", "%.3f" % float(X), ", 0.000, 0.000)", sep= "")
+    if (determinant > 0):
+        print("2 intersection point:")
+        s1 = -b + math.sqrt(determinant)/(2*a)
+        s2 = -b - math.sqrt(determinant)/(2*a)
+        print("(","%.3f" % X, ", ", Y, ", ", Z, sep= "")
+        print("(","%.3f" % (X*-1), ", ", "%.3f" % (Y*-1), ", ", "%.3f" % Z, sep= "")
 
-def decrypte(av):
-    print("Decrypted message:")
+def cone(av):
+    print("Cone with a ", av[8], "degree angle")
+    print("Line passing through the point (", av[2], ", ", av[3], ", ", av[4], ") and parallel to the vector (", av[5], ", ", av[6], ", ", av[7], ")", sep= "")
 
-def message(av):
-    if (av[3] == "0"):
-        encrypte(av)
-    if (av[3] == "1"):
-        decrypte(av)
+def shape(av):
+    if (av[1] == "1"):
+        sphere(av)
+    if (av[1] == "2"):
+        cylinder(av)
+    if (av[1] == "3"):
+        cone(av)
 
 def main():
     try :
@@ -37,8 +82,8 @@ def main():
         if (av[1] == "-h"):
             h()
         else:
-            if (l == 4):
-                message(av)
+            if (l == 9):
+                shape(av)
             else:
                 exit(84)
     except :
