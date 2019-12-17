@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
-from math import *
+import math
 
 def split(word):
     return [char for char in word]
@@ -24,44 +24,53 @@ def sphere(av):
     b = 2 * ((int(av[5]) * int(av[2])) + (int(av[6]) * int(av[3])) + (int(av[7]) * int(av[4])))
     c = int(av[2]) * int(av[2]) + int(av[3]) * int(av[3]) + int(av[4]) * int(av[4]) - int(av[8]) * int(av[8])
     determinant =  (b * b) - (4 * a * c)
-    X = int(av[5]) * determinant + int(av[2])
-    Y = int(av[6]) * determinant + int(av[3])
-    Z = int(av[7]) * determinant + int(av[4])
     if (determinant < 0):
         print("No intersection point.")
     if (determinant == 0):
         print("1 intersection point:")
         s1 = -b/(2 * a)
-        print("(", "%.3f" % float(X), ", 0.000, 0.000)", sep= "")
+        X = int(av[5]) * s1 + int(av[2])
+        Y = int(av[6]) * s1 + int(av[3])
+        Z = int(av[7]) * s1 + int(av[4])
+        print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
     if (determinant > 0):
         print("2 intersection point:")
         s1 = -b + math.sqrt(determinant)/(2*a)
         s2 = -b - math.sqrt(determinant)/(2*a)
-        print("(","%.3f" % X, ", ", Y, ", ", Z, sep= "")
-        print("(","%.3f" % (X*-1), ", ", "%.3f" % (Y*-1), ", ", "%.3f" % Z, sep= "")
+        X2 = int(av[5]) * s2 + int(av[2])
+        Y2 = int(av[6]) * s2 + int(av[3])
+        Z2 = int(av[7]) * s2 + int(av[4])
+        print("(","%.3f" % X1, ", ", Y1, ", ", Z1,")" , sep= "")
+        print("(","%.3f" % (X2), ", ", "%.3f" % (Y2), ", ", "%.3f" % Z2,")" , sep= "")
 
 def cylinder(av):
     print("Cylinder of radius ", av[8])
     print("Line passing through the point (", av[2], ", ", av[3], ", ", av[4], ") and parallel to the vector (", av[5], ", ", av[6], ", ", av[7], ")", sep= "")
-    a = int(av[5]) * int(av[5]) + int(av[6]) * int(av[6]) + int(av[7]) * int(av[7])
-    b = 2 * ((int(av[5]) * int(av[2])) + (int(av[6]) * int(av[3])) + (int(av[7]) * int(av[4])))
-    c = int(av[2]) * int(av[2]) + int(av[3]) * int(av[3]) + int(av[4]) * int(av[4]) - int(av[8]) * int(av[8])
+    a = int(av[5]) * int(av[5]) + int(av[6]) * int(av[6])
+    b = 2 * ((int(av[5]) * int(av[2])) + (int(av[6]) * int(av[3])))
+    c = int(av[2]) * int(av[2]) + int(av[3]) * int(av[3]) - int(av[8]) * int(av[8])
     determinant =  (b * b) - (4 * a * c)
-    X = int(av[5]) * determinant + int(av[2])
-    Y = int(av[6]) * determinant + int(av[3])
-    Z = int(av[7]) * determinant + int(av[4])
     if (determinant < 0):
         print("No intersection point.")
     if (determinant == 0):
         print("1 intersection point:")
         s1 = -b/(2 * a)
-        print("(", "%.3f" % float(X), ", 0.000, 0.000)", sep= "")
+        X = int(av[5]) * s1 + int(av[2])
+        Y = int(av[6]) * s1 + int(av[3])
+        Z = int(av[7]) * s1 + int(av[4])
+        print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
     if (determinant > 0):
         print("2 intersection point:")
         s1 = -b + math.sqrt(determinant)/(2*a)
         s2 = -b - math.sqrt(determinant)/(2*a)
-        print("(","%.3f" % X, ", ", Y, ", ", Z, sep= "")
-        print("(","%.3f" % (X*-1), ", ", "%.3f" % (Y*-1), ", ", "%.3f" % Z, sep= "")
+        X1 = int(av[5]) * s1 + int(av[2])
+        Y1 = int(av[6]) * s1 + int(av[3])
+        Z1 = int(av[7]) * s1 + int(av[4])
+        X2 = int(av[5]) * s2 + int(av[2])
+        Y2 = int(av[6]) * s2 + int(av[3])
+        Z2 = int(av[7]) * s2 + int(av[4])
+        print("(","%.3f" % X1, ", ", "%.3f" % Y1, ", ","%.3f" % Z1,")" , sep= "")
+        print("(","%.3f" % (X2), ", ", "%.3f" % (Y2), ", ", "%.3f" % Z2,")" , sep= "")
 
 def cone(av):
     print("Cone with a ", av[8], "degree angle")
