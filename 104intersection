@@ -43,7 +43,7 @@ def sphere(av):
         X2 = int(av[5]) * s2 + int(av[2])
         Y2 = int(av[6]) * s2 + int(av[3])
         Z2 = int(av[7]) * s2 + int(av[4])
-        print("(","%.3f" % X1, ", ", Y1, ", ", Z1,")" , sep= "")
+        print("(","%.3f" % X1, ", ", "%.3f" % Y1, ", ", "%.3f" % Z1,")" , sep= "")
         print("(","%.3f" % (X2), ", ", "%.3f" % (Y2), ", ", "%.3f" % Z2,")" , sep= "")
 
 def cylinder(av):
@@ -80,8 +80,34 @@ def cylinder(av):
         print("(","%.3f" % (X2), ", ", "%.3f" % (Y2), ", ", "%.3f" % Z2,")" , sep= "")
 
 def cone(av):
-    print("Cone with a ", av[8], "degree angle", sep= "")
+    print("Cone with a ", av[8], " degree angle", sep= "")
     print("Line passing through the point (", av[2], ", ", av[3], ", ", av[4], ") and parallel to the vector (", av[5], ", ", av[6], ", ", av[7], ")", sep= "")
+    avv = math.degrees(float(av[8]))
+    a = int(av[5]) * int(av[5]) + int(av[6]) * int(av[6]) - (int(av[7]) * int(av[7])) / (math.atan(avv) * math.atan(avv))
+    b = 2 * ((int(av[5]) * int(av[2])) + (int(av[6]) * int(av[3])) - ((int(av[7]) * int(av[4])) / (math.atan(avv) * math.atan(avv))))
+    c = int(av[2]) * int(av[2]) + int(av[3]) * int(av[3]) - (int(av[4]) * int(av[4]) / (math.atan(avv) * math.atan(avv)))
+    determinant =  (b * b) - (4 * a * c)
+    if (determinant < 0):
+        print("No intersection point.")
+    if (determinant == 0):
+        print("1 intersection point:")
+        s1 = -b/(2 * a)
+        X = int(av[5]) * s1 + int(av[2])
+        Y = int(av[6]) * s1 + int(av[3])
+        Z = int(av[7]) * s1 + int(av[4])
+        print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
+    if (determinant > 0):
+        print("2 intersection point:")
+        s1 = -b + math.sqrt(determinant)/(2*a)
+        s2 = -b - math.sqrt(determinant)/(2*a)
+        X1 = int(av[5]) * s1 + int(av[2])
+        Y1 = int(av[6]) * s1 + int(av[3])
+        Z1 = int(av[7]) * s1 + int(av[4])
+        X2 = int(av[5]) * s2 + int(av[2])
+        Y2 = int(av[6]) * s2 + int(av[3])
+        Z2 = int(av[7]) * s2 + int(av[4])
+        print("(","%.3f" % X1, ", ", "%.3f" % Y1, ", ", "%.3f" % Z1,")" , sep= "")
+        print("(","%.3f" % (X2), ", ", "%.3f" % (Y2), ", ", "%.3f" % Z2,")" , sep= "")
 
 def shape(av):
     if (av[1] == "1"):
