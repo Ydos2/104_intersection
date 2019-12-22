@@ -34,7 +34,7 @@ def sphere(av):
         Z = int(av[7]) * s1 + int(av[4])
         print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
     if (determinant > 0):
-        print("2 intersection point:")
+        print("2 intersection points:")
         s1 = -b + math.sqrt(determinant)/(2*a)
         s2 = -b - math.sqrt(determinant)/(2*a)
         X1 = int(av[5]) * s1 + int(av[2])
@@ -56,18 +56,14 @@ def cylinder(av):
     if (determinant < 0):
         print("No intersection point.")
     if (determinant == 0):
-        if (av[2] == av[7] and av[3] == av[6] and av[4] == av[5]):
-            print("There is an infinite number of intersection points.", sep= "")
-        else:
-            print("1 intersection point:")
-            s1 = -b/(2 * a)
-            X = int(av[5]) * s1 + int(av[2])
-            Y = int(av[6]) * s1 + int(av[3])
-            Z = int(av[7]) * s1 + int(av[4])
-            print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
-        
+        print("1 intersection point:")
+        s1 = -b/(2 * a)
+        X = int(av[5]) * s1 + int(av[2])
+        Y = int(av[6]) * s1 + int(av[3])
+        Z = int(av[7]) * s1 + int(av[4])
+        print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
     if (determinant > 0):
-        print("2 intersection point:")
+        print("2 intersection points:")
         s1 = -b + math.sqrt(determinant)/(2*a)
         s2 = -b - math.sqrt(determinant)/(2*a)
         X1 = int(av[5]) * s1 + int(av[2])
@@ -97,7 +93,7 @@ def cone(av):
         Z = int(av[7]) * s1 + int(av[4])
         print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
     if (determinant > 0):
-        print("2 intersection point:")
+        print("2 intersection points:")
         s1 = -b + math.sqrt(determinant)/(2*a)
         s2 = -b - math.sqrt(determinant)/(2*a)
         X1 = int(av[5]) * s1 + int(av[2])
@@ -110,12 +106,18 @@ def cone(av):
         print("(","%.3f" % (X2), ", ", "%.3f" % (Y2), ", ", "%.3f" % Z2,")" , sep= "")
 
 def shape(av):
+    i = 0
     if (av[1] == "1"):
         sphere(av)
+        i = 1
     if (av[1] == "2"):
         cylinder(av)
+        i = 1
     if (av[1] == "3"):
         cone(av)
+        i = 1
+    if (i == 0):
+        exit(84)
 
 def main():
     try :
