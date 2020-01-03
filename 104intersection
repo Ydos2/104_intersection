@@ -56,12 +56,15 @@ def cylinder(av):
     if (determinant < 0):
         print("No intersection point.")
     if (determinant == 0):
-        print("1 intersection point:")
-        s1 = -b/(2 * a)
-        X = int(av[5]) * s1 + int(av[2])
-        Y = int(av[6]) * s1 + int(av[3])
-        Z = int(av[7]) * s1 + int(av[4])
-        print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
+        if (a == 0 and b == 0 and c == 0):
+            print("There is an infinite number of intersection points.")
+        else:
+            print("1 intersection point:")
+            s1 = -b/(2 * a)
+            X = int(av[5]) * s1 + int(av[2])
+            Y = int(av[6]) * s1 + int(av[3])
+            Z = int(av[7]) * s1 + int(av[4])
+            print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
     if (determinant > 0):
         print("2 intersection points:")
         s1 = -b + math.sqrt(determinant)/(2*a)
