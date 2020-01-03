@@ -23,6 +23,8 @@ def sphere(av):
     a = int(av[5]) * int(av[5]) + int(av[6]) * int(av[6]) + int(av[7]) * int(av[7])
     b = 2 * ((int(av[5]) * int(av[2])) + (int(av[6]) * int(av[3])) + (int(av[7]) * int(av[4])))
     c = int(av[2]) * int(av[2]) + int(av[3]) * int(av[3]) + int(av[4]) * int(av[4]) - int(av[8]) * int(av[8])
+    if (a == 0 and b == 0 and c == 0):
+        print("There is an infinite number of intersection points.")
     determinant =  (b * b) - (4 * a * c)
     if (determinant < 0):
         print("No intersection point.")
@@ -52,19 +54,17 @@ def cylinder(av):
     a = int(av[5]) * int(av[5]) + int(av[6]) * int(av[6])
     b = 2 * ((int(av[5]) * int(av[2])) + (int(av[6]) * int(av[3])))
     c = int(av[2]) * int(av[2]) + int(av[3]) * int(av[3]) - int(av[8]) * int(av[8])
-    determinant =  (b * b) - (4 * a * c)
+    if (a == 0 and b == 0 and c == 0):
+        print("There is an infinite number of intersection points.")
+    determinant = (b * b) - (4 * a * c)
     if (determinant < 0):
         print("No intersection point.")
     if (determinant == 0):
-        if (a == 0 and b == 0 and c == 0):
-            print("There is an infinite number of intersection points.")
-        else:
-            print("1 intersection point:")
-            s1 = -b/(2 * a)
-            X = int(av[5]) * s1 + int(av[2])
-            Y = int(av[6]) * s1 + int(av[3])
-            Z = int(av[7]) * s1 + int(av[4])
-            print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
+        s1 = -b/(2 * a)
+        X = int(av[5]) * s1 + int(av[2])
+        Y = int(av[6]) * s1 + int(av[3])
+        Z = int(av[7]) * s1 + int(av[4])
+        print("(","%.3f" % (X), ", ", "%.3f" % (Y), ", ", "%.3f" % Z,")" , sep= "")
     if (determinant > 0):
         print("2 intersection points:")
         s1 = -b + math.sqrt(determinant)/(2*a)
@@ -81,10 +81,14 @@ def cylinder(av):
 def cone(av):
     print("Cone with a ", av[8], " degree angle", sep= "")
     print("Line passing through the point (", av[2], ", ", av[3], ", ", av[4], ") and parallel to the vector (", av[5], ", ", av[6], ", ", av[7], ")", sep= "")
-    avv = math.degrees(float(av[8]))
-    a = int(av[5]) * int(av[5]) + int(av[6]) * int(av[6]) - (int(av[7]) * int(av[7])) / (math.atan(avv) * math.atan(avv))
-    b = 2 * ((int(av[5]) * int(av[2])) + (int(av[6]) * int(av[3])) - ((int(av[7]) * int(av[4])) / (math.atan(avv) * math.atan(avv))))
-    c = int(av[2]) * int(av[2]) + int(av[3]) * int(av[3]) - (int(av[4]) * int(av[4]) / (math.atan(avv) * math.atan(avv)))
+    tg = math.tan(math.radians(int(av[8])))**2
+    ray_p = (int(sys.argv[2]), int(sys.argv[3]), int(sys.argv[4]))
+    ray_v = (int(sys.argv[5]), int(sys.argv[6]), int(sys.argv[7]))
+    a = ray_v[0]**2 + ray_v[1]**2 - ray_v[2]**2 * tg
+    b = 2 * (ray_p[0]*ray_v[0] + ray_p[1]*ray_v[1] - tg*ray_p[2]*ray_v[2])
+    c = ray_p[0]**2 + ray_p[1]**2 - ray_p[2]**2 * tg
+    if (a == 0 and b == 0 and c == 0):
+        print("There is an infinite number of intersection points.")
     determinant =  (b * b) - (4 * a * c)
     if (determinant < 0):
         print("No intersection point.")
